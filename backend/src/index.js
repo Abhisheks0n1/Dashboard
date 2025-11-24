@@ -4,22 +4,22 @@ const bodyParser = require('body-parser');
 require('dotenv').config();
 require('./config/db');
 
-const authController = require('./controllers/authController');
-const dashboardController = require('./controllers/dashboardController');
-const authenticate = require('./middleware/authMiddleware');
+const apiRoutes = require('./routes/apiRoutes');
 
 const app = express();
+
+
 app.use(cors());
 app.use(bodyParser.json());
 
-app.post('/auth/register', authController.register);
-app.post('/auth/login', authController.login);
-app.post('/auth/logout', authController.logout);
+app.use('/api', apiRoutes);
 
-app.get('/dashboard', authenticate, dashboardController.getDashboard);
-app.post('/dashboard', authenticate, dashboardController.saveDashboard);
 
-304
-app.listen(process.env.PORT || 5000, () => {
-  console.log(`Backend running on http://localhost:${process.env.PORT || 5000}`);
+app.get('/', (req, res) => {
+  res.json({ message: 'Dashboard API Running!' });
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

@@ -52,4 +52,4 @@ You must register
 Folder Structure
 textmy-dashboard-app/
 ├── backend/     → Server, database, authentication
-└── frontend/    → Beautiful React dashboard UI
+└── frontend/    → React dashboard UI
